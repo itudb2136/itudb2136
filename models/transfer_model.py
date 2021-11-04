@@ -34,9 +34,8 @@ class TransferTable:
 
     def get_transfer(self, transfer_id):
         with self.db_connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM transfers WHERE transfer_id = ?", transfer_id)
+            cursor.execute("SELECT * FROM transfers WHERE transfer_id = %s", (transfer_id,))
         
-
     def add_transfer(self, new_transfer:TransferModel):
         with self.db_connection.cursor() as cursor:
             cursor.execute("INSERT INTO transfers (player_id, from_team, to_team, transfer_fee, is_loan, offer_date)\
