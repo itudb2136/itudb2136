@@ -12,3 +12,23 @@ class TransferModel:
         self.positive_reviews = positive_reviews
         self.negative_reviews = negative_reviews
         self.is_accepted = is_accepted
+
+class TransferTable:
+    def __init__(self, db_connection):
+        self.db_connection = db_connection
+        # self.tablename = "transfers"
+
+    def get_all_transfers(self, limit=None):
+        pass
+
+    def get_transfer(self, transfer_id):
+        pass
+        
+    def add_transfer(self, new_transfer:TransferModel):
+        pass
+
+    def delete_transfer(self, transfer_id):
+        pass
+
+    def update_transfer(self, transfer_id):
+        pass
