@@ -47,7 +47,26 @@ class TransferTable:
                             new_transfer.transfer_fee, new_transfer.is_loan, new_transfer.offer_date)
 
     def delete_transfer(self, transfer_id):
-        pass
+        with self.db_connection.cursor() as cursor:
+            cursor.execute("DELETE FROM transfers WHERE transfer_id = %s", (transfer_id,))
 
-    def update_transfer(self, transfer_id):
-        pass
+    def update_transfer(self, transfer_id, updated_transfer:TransferModel):
+        player_id = updated_transfer.transfer_id
+        from_team = updated_transfer.from_team
+        to_team = updated_transfer.to_team
+        transfer_fee = updated_transfer.transfer_fee
+        is_loan = updated_transfer.is_loan
+        offer_date = updated_transfer.offer_date
+        is_accepted = updated_transfer.is_accepted
+
+        with self.db_connection.cursor() as cursor:
+            cursor.execute("UPDATE transfers\
+                            SET player_id = %s\
+                                from_team = %s\
+                                to_team = %s\
+                                transfer_fee = %s\
+                                is_loan = %s\
+                                offer_date = %s\
+                                is_accepted = %s\
+                            WHERE transfer_id = %s",
+                            (player_id, from_team, to_team, transfer_fee, is_loan, offer_date, is_accepted, transfer_id))
