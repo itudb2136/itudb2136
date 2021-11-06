@@ -32,9 +32,12 @@ class TransferTable:
 
         return create_models_from_tuple(transfers) 
 
-    def get_transfer(self, transfer_id):
+    def get_transfer_by_id(self, transfer_id):
         with self.db_connection.cursor() as cursor:
             cursor.execute("SELECT * FROM transfers WHERE transfer_id = %s", (transfer_id,))
+            transfer = cursor.fetchone()
+        
+        return create_models_from_tuple(transfer)
         
     def add_transfer(self, new_transfer:TransferModel):
         with self.db_connection.cursor() as cursor:
