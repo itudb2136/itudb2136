@@ -1,4 +1,4 @@
-class SkillsModel:
+class PlayerSkillsModel:
     def __init__(self, player_id, finishing, short_passing, dribbling, ball_controll, acceleration, sprint_speed, jumping, stamina):
         self.player_id = player_id
         self.finishing = finishing
@@ -10,5 +10,5 @@ class SkillsModel:
         self.jumping = jumping
         self.stamina = stamina
 
-class SkillsTable:
+class PlayerSkillsTable:
     pass

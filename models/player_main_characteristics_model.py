@@ -1,4 +1,4 @@
-class CharacteristicsModels:
+class PlayerCharacteristicsModel:
     def __init__(self, player_id, overall, potential, preferred_foot, weak_foot_skill, skill_moves, attack_work_rate, defence_work_rate):
         self.player_id = player_id
         self.overall = overall
@@ -9,5 +9,5 @@ class CharacteristicsModels:
         self.attack_work_rate = attack_work_rate
         self.defence_work_rate = defence_work_rate
 
-class CharacteristicsTable:
+class PlayerCharacteristicsTable:
     pass
