@@ -1,8 +1,7 @@
 from datetime import datetime
-from .player_model import create_player_models_from_tuple
 
 class TransferModel:
-    def __init__(self, transfer_id, player_id, from_team, to_team, transfer_fee, offered_wage, is_loan=False, offer_date=datetime.now(), positive_reviews=0, negative_reviews=0, is_accepted=False):
+    def __init__(self, player_id, from_team, to_team, transfer_fee, offered_wage, is_loan=False, offer_date=datetime.now(), positive_reviews=0, negative_reviews=0, is_accepted=False, transfer_id=None):
         self.transfer_id = transfer_id
         self.player_id = player_id
         self.from_team = from_team
@@ -44,15 +43,17 @@ class TransferTable:
     def add_transfer(self, new_transfer:TransferModel):
         with self.db_connection.cursor() as cursor:
             cursor.execute("INSERT INTO transfers (player_id, from_team, to_team, transfer_fee, is_loan, offer_date, offered_wage)\
-                            VALUES(?, ?, ?, ?, ?, ?)",
-                            new_transfer.player_id, new_transfer.from_team, new_transfer.to_team,
+                            VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                            (new_transfer.player_id, new_transfer.from_team, new_transfer.to_team,
                             new_transfer.transfer_fee, new_transfer.is_loan, new_transfer.offer_date,
-                            new_transfer.offered_wage
+                            new_transfer.offered_wage,)
                         )
+            self.db_connection.commit()
 
     def delete_transfer(self, transfer_id):
         with self.db_connection.cursor() as cursor:
             cursor.execute("DELETE FROM transfers WHERE transfer_id = %s", (transfer_id,))
+            self.db_connection.commit()
 
     def update_transfer(self, transfer_id, updated_transfer:TransferModel):
         player_id = updated_transfer.transfer_id
@@ -74,3 +75,4 @@ class TransferTable:
                                 offered_wage = %s\
                             WHERE transfer_id = %s",
                             (player_id, to_team, transfer_fee, is_loan, offer_date, is_accepted, offered_wage, transfer_id,))
+            self.db_connection.commit()
