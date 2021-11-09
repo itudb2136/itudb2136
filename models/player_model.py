@@ -16,7 +16,7 @@ class PlayerModel:
         self.characteristics = characteristics
         self.skills = skills
         self.image = image
-        self.contract = contract;
+        self.contract = contract
 
 def create_player_models_from_tuple(players):
     res_models = []
@@ -30,7 +30,7 @@ def create_player_models_from_tuple(players):
         res_models.append(model)
 
     if len(res_models) == 1:
-        return res_models[0];
+        return res_models[0]
     return res_models
 
 class PlayerTable:
