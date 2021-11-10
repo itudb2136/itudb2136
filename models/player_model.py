@@ -96,12 +96,12 @@ class PlayerTable:
 
             self.db_connection.commit()
 
-    # while adding a new player, this function return all player
+    # while adding a new player, this function return all available player
     # ids and make enable to check whether the given id is already
     # in or not.
-    def get_all_player_ids(self):
+    def get_maximum_player_id(self):
         with self.db_connection.cursor() as cursor:
-            cursor.execute("SELECT player_id FROM players")
-            player_ids = cursor.fetchall()
+            cursor.execute("SELECT id FROM players ORDER BY id DESC")
+            maximum_id = cursor.fetchone()
 
-        return player_ids
+        return maximum_id[0]
