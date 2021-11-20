@@ -1,0 +1,30 @@
+{% extends "layout.html" %} {% block title %}Add Player{% endblock %}
+
+{% block content %}
+
+
+<form method="POST">
+
+    <select name="playerId">
+    {% for i in range(1, 21) %}
+        <option value="{{ max_id + i }}" SELECTED>{{ max_id + i }}</option>
+    {% endfor %}     
+    </select>
+
+    
+    <input name="name">
+    <input name="age">
+    <input name="nationality">
+    <input name="int_reputation">
+    <input name="position">
+    <input name="height">
+    <input name="weight">
+    <input name="overall">
+    <input name="potential">
+
+
+    <input type="submit">
+</form>
+
+
+{% endblock %}

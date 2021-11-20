@@ -1,0 +1,14 @@
+{% extends "layout.html" %} {% block title %}Player{% endblock %}
+
+{% block content %}
+
+<p>{{ player.name }}</p>
+<p>{{ player.contract.contract_valid_until }}</p>
+
+<form method="POST">
+    <input name="ToTeam">
+    <input type="submit">
+</form>
+
+
+{% endblock %}

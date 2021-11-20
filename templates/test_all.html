@@ -1,0 +1,12 @@
+{% extends "layout.html" %} {% block title %}All{% endblock %}
+
+{% block content %}
+
+{% for player in players %}
+    <a href="{{ url_for('player_bp.show_player_by_id', player_id=player.player_id) }}">{{ player.name }}</a>
+    <p>{{ player.contract.contract_valid_until }}</p>
+{% endfor %}
+
+
+
+{% endblock %}
