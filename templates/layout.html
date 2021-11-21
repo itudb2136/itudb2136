@@ -11,7 +11,7 @@
   </head>
   <body>
     
-    <nav class="navbar fixed-top navbar-expand-md navbar-light bg-white">
+    <nav class="navbar sticky-top navbar-expand-md navbar-light bg-white py-0">
       <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -48,9 +48,11 @@
                 </div>
               </li>   
             {% else %}
-              <form class="form-inline ml-3">
-                <button class="btn btn-sm btn-outline-secondary" type="button">Sign In</button>
-              </form>
+              <li class="nav-item justify-content-center ml-3 ml-auto p-3">
+                <form class="form-inline ml-3">
+                  <button class="btn btn-sm btn-dark" type="button">Sign In</button>
+                </form>
+              </li> 
             {% endif %}
           </ul>
       </div>
@@ -70,8 +72,8 @@
 
     <footer>
       <div>
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-          © 2021 Copyright: Emircan Gündoğdu
+        <div class="text-center p-4 bg-dark">
+          <p class="text-white">© 2021 Copyright: Emircan Gündoğdu</p>
         </div>
       </div>
     </footer>
