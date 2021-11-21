@@ -8,9 +8,15 @@ from models.player_main_characteristics_model import PlayerCharacteristicsModel
 from models.player_skills_model import PlayerSkillsModel
 from models.player_contract_model import PlayerContractModel
 
-player_bp = Blueprint('player_bp', __name__)
+player_bp = Blueprint('player_bp', __name__, url_prefix='/players')
 
-@player_bp.route('/players/<player_id>', methods=['GET', 'POST'])
+@player_bp.route('/', methods=['GET'])
+def show_all_players():
+    pt = PlayerTable(get_db())
+    players = pt.get_all_players(limit=100)
+    return render_template("test_all.html", players=players)
+
+@player_bp.route('/<player_id>', methods=['GET', 'POST'])
 def show_player_by_id(player_id):
     pt = PlayerTable(get_db())
     player = pt.get_player_by_id(player_id)
@@ -24,13 +30,7 @@ def show_player_by_id(player_id):
         tt.add_transfer(transfer)
         return redirect(url_for("player_bp.show_all_players"))
 
-@player_bp.route('/players/', methods=['GET'])
-def show_all_players():
-    pt = PlayerTable(get_db())
-    players = pt.get_all_players(limit=10)
-    return render_template("test_all.html", players=players)
-
-@player_bp.route('/players/add_player', methods=['GET', 'POST'])
+@player_bp.route('/add_player', methods=['GET', 'POST'])
 def add_new_player():
     pt = PlayerTable(get_db())
     if request.method == 'GET':
