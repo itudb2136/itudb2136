@@ -17,7 +17,7 @@ class TransferModel:
 def create_transfer_models_from_tuple(transfers):
     res_models = []
     for t in transfers:
-        model = TransferModel(t[0], t[1], t[2], t[3], t[4], t[5], t[6], t[7], t[8], t[9], t[10])
+        model = TransferModel(t[1], t[2], t[3], t[4], t[5], t[6], t[7], t[8], t[9], t[10])
         res_models.append(model)
     
     if len(res_models) == 1:
