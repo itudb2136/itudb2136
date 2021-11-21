@@ -7,8 +7,8 @@ from app import login_manager
 
 auth_bp = Blueprint('auth_bp', __name__)
 
-@auth_bp.route('/login', methods=['GET', 'POST'])
-def login():
+@auth_bp.route('/signup', methods=['GET', 'POST'])
+def signup():
     form = LoginForm()
     if form.validate_on_submit():
         # validate user, if not flash and redirect there
@@ -19,10 +19,15 @@ def login():
             login_user(user)
             return redirect('/players')
         else:
-            flash("The username is in use.")
+            flash("The username is in use.", category="error")
             render_template('login.html', form=form)
 
     return render_template('login.html', form=form)
+
+@auth_bp.route("/login", methods=['GET', 'POST'])
+def login():
+    pass
+
 
 @auth_bp.route("/logout")
 @login_required
