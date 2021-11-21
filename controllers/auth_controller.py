@@ -20,9 +20,9 @@ def signup():
             return redirect('/players')
         else:
             flash("The username is in use.", category="error")
-            render_template('login.html', form=form)
+            render_template('signup.html', form=form)
 
-    return render_template('login.html', form=form)
+    return render_template('signup.html', form=form)
 
 @auth_bp.route("/login", methods=['GET', 'POST'])
 def login():
