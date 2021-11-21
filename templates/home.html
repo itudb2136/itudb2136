@@ -1,19 +1,94 @@
 {% extends "layout.html" %} {% block title %}Home{% endblock %}
 
+{% block js %}
+{% endblock %}
+
 {% block content %}
-<div class="row gx-4">
-    <div class="col mw-100">
+<div class="row gx-4 mw-100 ml-1 mt-2 justify-content-center">
+    <div class="col mw-100 shadow mb-5 p-3 bg-white rounded" style="height: 80vh;">
+        <!-- PLayers -->
+        <div class="mh-100 p-3 mx-auto" style="overflow: auto;">
+            <table class="table table-hover table-sm" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th class="th-sm">Name</th>
+                        <th class="th-sm">Age</th>
+                        <th class="th-sm">Nationality</th>
+                        <th class="th-sm">Club</th>
+                        <th class="th-sm">View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for player in players %}
+                        <tr>
+                            <td>{{ player.name }}</td>
+                            <td>{{ player.age }}</td>
+                            <td>{{ player.nationality }}</td>
+                            <td>{{ ct.get_club_by_id(player.contract.club).club_name }}</td>
+                            <td><a href="{{ url_for('player_bp.show_player_by_id', player_id=player.player_id) }}"><button class="btn btn-sm">View</button></a></td>                        
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col mw-100" style="height: 80vh;">
+      
+      <div class="row mh-40 p-3 mx-auto shadow p-3 mb-2 bg-white rounded justify-content-center">
+        <div style="height: 35vh; overflow: auto;">
+            <table class="table table-hover table-sm" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th class="th-sm">Club Name</th>
+                        <th class="th-sm">Is Taken</th>
+                        <th class="th-sm">View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for club in clubs %}
+                        <tr>
+                            <td>{{ club.club_name }}</td>
+                            <td>{{ club.is_taken }}</td>
+                            <!--  -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+      </div>
+
+      <div class="row mh-40 p-3 mx-auto shadow p-3 mb-5 bg-white rounded">
+        <div style="height: 35vh; overflow: auto;">
+            <table class="table table-hover table-sm" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th class="th-sm">Name</th>
+                        <th class="th-sm">From</th>
+                        <th class="th-sm">To</th>
+                        <th class="th-sm">Offer Date</th>
+                        <th class="th-sm">Fee</th>
+                        <th class="th-sm">Is Loan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transfer in transfers %}
+                        <tr>
+                            <td>{{ pt.get_player_by_id(transfer.player_id).name }}</td>
+                            <td>{{ ct.get_club_by_id(transfer.from_team).club_name }}</td>
+                            <td>{{ ct.get_club_by_id(transfer.to_team).club_name }}</td>
+                            <td>{{ transfer.offer_date }}</td>
+                            <td>{{ transfer.transfer_fee / 1000000.0 }}M €</td>
+                            <td>{{ transfer.is_loan }}</td>
+                            <!--  -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+      </div>
 
     </div>
 
-    <div class="col mw-100">
-      <div class="row">
-
-      </div>
-      <div class="row">
-        
-      </div>
-    </div>
-
-  </div>
+</div>
 {% endblock %}
