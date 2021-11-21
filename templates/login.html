@@ -1,0 +1,44 @@
+{% extends "layout.html" %} {% block title %}Login{% endblock %}
+
+{% block content %}
+
+<form method="POST">
+    {{ form.csrf_token }}
+
+    <p>
+        {{ form.username.label }}<br>
+        {{ form.username(size=32) }}<br>
+        {% for error in form.username.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}<br>
+        {% for error in form.password.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.password_confirm.label }}<br>
+        {{ form.password_confirm(size=32) }}<br>
+        {% for error in form.password_confirm.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.fullname.label }}<br>
+        {{ form.fullname(size=32) }}<br>
+        {% for error in form.fullname.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+
+    {{ form.role(class="")}}
+
+    <input type="submit" value="Go">
+</form>
+
+
+
+{% endblock %}
