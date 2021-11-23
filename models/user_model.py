@@ -15,7 +15,7 @@ class User(UserMixin):
         self.user_id = user_id
 
     def get_id(self):
-        return self.user_id
+        return self.username
 
 def create_user_from_tuple(user_tuple):
     if user_tuple is not None:
@@ -53,11 +53,4 @@ class UserTable:
             cursor.execute("SELECT id FROM users WHERE username = %s", (username,))
             user_id = cursor.fetchone()
         
-        return None if user_id is None else user_id[0]
-
-    def get_maximum_id(self):
-        with self.db_connection.cursor() as cursor:
-            cursor.execute("SELECT id FROM users ORDER BY id DESC")
-            user_id = cursor.fetchone()
-
         return None if user_id is None else user_id[0]

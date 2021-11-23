@@ -14,7 +14,7 @@ def signup():
         # validate user, if not flash and redirect there
         ut = UserTable(get_db())
         if ut.get_id_by_username(form.username.data) is None:
-            user = User(form.username.data, form.password.data, form.fullname.data, form.role.data, user_id=ut.get_maximum_id() + 1)
+            user = User(form.username.data, form.password.data, form.fullname.data, form.role.data)
             ut.add_user(user)
             login_user(user)
             return redirect('/players')
@@ -37,10 +37,10 @@ def logout():
     return redirect(url_for('home_bp.home'))
 
 @login_manager.user_loader
-def load_user(user_id):
+def load_user(username):
     """Check if user is logged-in on every page load."""
-    if user_id is not None:
+    if username is not None:
         ut = UserTable(get_db())
-        return ut.get_user_by_id(user_id)
+        return ut.get_user_by_username(username)
     return None
 
