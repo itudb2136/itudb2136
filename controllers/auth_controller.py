@@ -1,6 +1,7 @@
 from flask import g, request, Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required
 from controllers.forms.LoginForm import LoginForm
+from models.club_model import ClubTable
 from database import get_db
 from models.user_model import User, UserTable
 from app import login_manager
@@ -9,6 +10,9 @@ auth_bp = Blueprint('auth_bp', __name__)
 
 @auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
+    ct = ClubTable(get_db())
+    teams = ct.get_all_clubs()
+
     form = LoginForm()
     if form.validate_on_submit():
         # validate user, if not flash and redirect there
@@ -20,9 +24,9 @@ def signup():
             return redirect('/players')
         else:
             flash("The username is in use.", category="error")
-            render_template('signup.html', form=form)
+            render_template('signup.html', form=form, teams=teams)
 
-    return render_template('signup.html', form=form)
+    return render_template('signup.html', form=form, teams=teams)
 
 @auth_bp.route("/login", methods=['GET', 'POST'])
 def login():
