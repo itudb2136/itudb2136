@@ -1,11 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, RadioField
 from wtforms.validators import DataRequired, EqualTo
 
 class LoginForm(FlaskForm):
-    username = StringField('username', validators=[DataRequired()])
-    password = PasswordField('password', validators=[DataRequired(), EqualTo(fieldname='password_confirm')])
-    fullname = StringField('fullname', validators=[DataRequired()])
-    password_confirm = PasswordField('password_confirm')
-    role = SelectField("role", choices=[("manager", "manager"), ("fan", "fan")])
-    submit = SubmitField('login')
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired(), EqualTo(fieldname='password_confirm', message="Passwords must be the same.")])
+    fullname = StringField('Full Name', validators=[DataRequired()])
+    password_confirm = PasswordField('Confirm Password')
+    role = RadioField("Role", choices=[("manager", "manager"), ("fan", "fan")])
