@@ -1,58 +1,75 @@
 {% extends "layout.html" %} {% block title %}Login{% endblock %}
 
+{% block linkscript%}
+<link rel="stylesheet" href="../static/signup-form.css">
+
+{% endblock %}
+
+
+
 {% block content %}
 
 <form method="POST">
     {{ form.csrf_token }}
 
-    <div class="signup-form">
+    <div class="signup-form shadow">
         <div class="form-elements">
+            <h5 style="text-align: center;">Sign Up</h5>
             <div class="form-element">
-                <div class="form-input-label">{{ form.username.label }}</div>
-                <div class="form-input">{{ form.username(size=32) }}</div>
+                {{ form.username.label(class_="form-input-label") }}
+                {{ form.username(size=32, class_="form-input") }}
                 {% for error in form.username.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </div>
 
             <div class="form-element">
-                <div class="form-input-label">{{ form.password.label }}</div>
-                <div class="form-input">{{ form.password(size=32) }}</div>
+                {{ form.password.label(class_="form-input-label") }}
+                {{ form.password(size=32, class_="form-input") }}
                 {% for error in form.password.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </div>
 
             <div class="form-element">
-                <div class="form-input-label">{{ form.password_confirm.label }}</div>
-                <div class="form-input">{{ form.password_confirm(size=32) }}</div>
+                {{ form.password_confirm.label(class_="form-input-label") }}
+                {{ form.password_confirm(size=32, class_="form-input") }}
                 {% for error in form.password_confirm.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </div>
 
             <div class="form-element">
-                <div class="form-input-label">{{ form.fullname.label }}</div>
-                <div class="form-input">{{ form.fullname(size=32) }}</div>
+                {{ form.fullname.label(class_="form-input-label") }}
+                {{ form.fullname(size=32, class_="form-input") }}
                 {% for error in form.fullname.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </div>
             
             <div class="form-element">
-                <div class="form-input-label">{{ form.role.label }}</div>
-                <div class="form-input">{{ form.role(class="") }}</div>
+                <span class="form-input-label">{{ form.role.label() }}</span>
+                <div class="form-radio-buttons">
+                    {% for role in form.role %}
+                        {{ role(class_="btn-check form-radio", checked_="checked") }}
+                        {{ role.label(class_="btn btn-outline-danger form-radio-label") }}
+                    {% endfor %}
+                </div>
+                <!-- {{ form.role(class_="btn-check", id="role-button") }} -->
                 {% for error in form.role.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
+                    <span style="color: rgb(154, 38, 38);">{{ error }}</span>
                 {% endfor %}
             </div>
 
-            <input type="submit" value="Go">
+            <input type="submit" value="Sign Up" class="form-input-button">
         </div>
         <div class="form-all-teams">
-            {% for team in teams %}
-
-            {% endfor %}
+            <h2>You can take teams below.</h2>
+            <div class="teams-container">
+                {% for team in teams %}
+                    
+                {% endfor %}
+            </div>
         </div>
     </div>
 
