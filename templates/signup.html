@@ -1,4 +1,4 @@
-{% extends "layout.html" %} {% block title %}Login{% endblock %}
+{% extends "layout.html" %} {% block title %}Sign Up{% endblock %}
 
 {% block linkscript%}
 <link rel="stylesheet" href="../static/signup-form.css">
@@ -48,11 +48,11 @@
             </div>
             
             <div class="form-element">
-                <span class="form-input-label">{{ form.role.label() }}</span>
+                <span class="form-input-label form-radio-role">{{ form.role.label() }}</span>
                 <div class="form-radio-buttons">
                     {% for role in form.role %}
                         {{ role(class_="btn-check form-radio", checked_="checked") }}
-                        {{ role.label(class_="btn btn-outline-danger form-radio-label") }}
+                        {{ role.label(class_="form-radio-label") }}
                     {% endfor %}
                 </div>
                 <!-- {{ form.role(class_="btn-check", id="role-button") }} -->
