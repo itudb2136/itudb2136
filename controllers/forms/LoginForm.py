@@ -7,4 +7,4 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired(), EqualTo(fieldname='password_confirm', message="Passwords must be the same.")])
     fullname = StringField('Full Name', validators=[DataRequired()])
     password_confirm = PasswordField('Confirm Password')
-    role = RadioField("Role", choices=[("manager", "manager"), ("fan", "fan")])
+    role = RadioField("Role", choices=[("manager", "Manager"), ("fan", "Fan")], default="fan")
