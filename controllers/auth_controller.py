@@ -18,7 +18,7 @@ def signup():
         # validate user, if not flash and redirect there
         ut = UserTable(get_db())
         if ut.get_id_by_username(form.username.data) is None:
-            user = User(form.username.data, form.password.data, form.fullname.data, form.role.data)
+            user = User(form.username.data, form.password.data, form.fullname.data, form.role.data, relevant_team_id=request.form.get("team"))
             ut.add_user(user)
             login_user(user)
             return redirect('/players')
@@ -26,7 +26,7 @@ def signup():
             flash("The username is in use.", category="error")
             render_template('signup.html', form=form, teams=teams)
 
-    return render_template('signup.html', form=form, teams=teams)
+    return render_template('signup.html', form=form, teams=sorted(teams, key=lambda team:team.club_name))
 
 @auth_bp.route("/login", methods=['GET', 'POST'])
 def login():
