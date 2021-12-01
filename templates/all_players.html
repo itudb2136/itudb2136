@@ -1,0 +1,32 @@
+{% extends "layout.html" %} {% block title %}All{% endblock %}
+
+{% block linkscript%}
+<link rel="stylesheet" href="../static/players.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="row players-card">
+{% for player in players %}
+    <div class="player-card">
+        <div class="card" style="width: 18rem;">
+            {% if player.image.image is none %}
+            <img src="../static/default-player-photo.jpg" alt="Profile Photo" width="200" height="200">     
+            {% else %}
+            <img src="data:;base64,{{pic}}" alt="WOOW" width="200" height="200"> 
+            {% endif %}
+            <div class="card-body">
+            <h5 class="card-title">{{ player.name }}</h5>
+            <p class="card-text">Player of {{ ct.get_club_by_id(player.contract.club).club_name }} until {{ player.contract.contract_valid_until }}.</p>
+            <a href="{{ url_for('player_bp.show_player_by_id', player_id=player.player_id) }}" class="btn btn-primary">View</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+
+
+
+
+{% endblock %}
