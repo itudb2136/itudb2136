@@ -7,14 +7,16 @@ from models.player_model import PlayerModel, PlayerTable
 from models.player_main_characteristics_model import PlayerCharacteristicsModel
 from models.player_skills_model import PlayerSkillsModel
 from models.player_contract_model import PlayerContractModel
+from models.club_model import ClubTable
 
 player_bp = Blueprint('player_bp', __name__, url_prefix='/players')
 
 @player_bp.route('/', methods=['GET'])
 def show_all_players():
     pt = PlayerTable(get_db())
+    ct = ClubTable(get_db())
     players = pt.get_all_players(limit=100)
-    return render_template("test_all.html", players=players)
+    return render_template("all_players.html", players=players, ct=ct)
 
 @player_bp.route('/<player_id>', methods=['GET', 'POST'])
 def show_player_by_id(player_id):
