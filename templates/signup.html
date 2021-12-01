@@ -2,7 +2,7 @@
 
 {% block linkscript%}
 <link rel="stylesheet" href="../static/signup-form.css">
-
+<script src="../static/signup-form.js" defer></script>
 {% endblock %}
 
 
@@ -51,7 +51,7 @@
                 <span class="form-input-label form-radio-role">{{ form.role.label() }}</span>
                 <div class="form-radio-buttons">
                     {% for role in form.role %}
-                        {{ role(class_="btn-check form-radio", checked_="checked") }}
+                        {{ role(class_="btn-check form-radio") }}
                         {{ role.label(class_="form-radio-label") }}
                     {% endfor %}
                 </div>
@@ -64,22 +64,25 @@
             <input type="submit" value="Sign Up" class="form-input-button">
         </div>
         <div class="form-all-teams">
-            <h5>You can be a fan of one of the teams below.</h5>
-            <div class="teams-container" id="teams-fan">
-                {% for team in teams %}
-                    <input type="radio" class="btn-check" id="{{ team.id }}" name="team" value="{{ team.id }}">
-                    <label class="teams-container-team btn btn-outline-success" for="{{ team.id }}">{{  team.club_name }}</label><br>
-                {% endfor %}
+            <div id="teams-fan">
+                <h5>You can be a fan of one of the teams below.</h5>
+                <div class="teams-container">
+                    {% for team in teams %}
+                        <input type="radio" class="btn-check" id="{{ team.id }}" name="team" value="{{ team.id }}">
+                        <label class="teams-container-team btn btn-outline-success" for="{{ team.id }}">{{  team.club_name }}</label><br>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="teams-container" id="teams-manager" style="display: none;">
+            <div id="teams-manager">
                 <h5>You can take teams below.</h5>
-                {% for team in teams %}
-                    <div class="teams-container-team">
-                        <p>{{  team.club_name }}</p>
-                    </div>
-                    <input type="radio" class="btn-check" id="btn-check-outlined">
-                    <label class="btn btn-outline-primary" for="btn-check-outlined">{{  team.club_name }}</label><br>
-                {% endfor %}
+                <div class="teams-container">
+                    {% for team in teams %}
+                        {% if team.is_taken == false %}
+                            <input type="radio" class="btn-check" id="{{ team.id }}" name="team" value="{{ team.id }}">
+                            <label class="teams-container-team btn btn-outline-success" for="{{ team.id }}">{{  team.club_name }}</label><br>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
