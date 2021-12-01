@@ -16,7 +16,10 @@ def show_all_players():
     pt = PlayerTable(get_db())
     ct = ClubTable(get_db())
     players = pt.get_all_players(limit=100)
-    return render_template("all_players.html", players=players, ct=ct)
+    statistics = {"Average age": "",
+                  "Max age": "",
+                  "Min age": ""}
+    return render_template("all_players.html", players=players, ct=ct, statistics=statistics)
 
 @player_bp.route('/<player_id>', methods=['GET', 'POST'])
 def show_player_by_id(player_id):
@@ -24,8 +27,9 @@ def show_player_by_id(player_id):
     player = pt.get_player_by_id(player_id)
 
     if request.method == 'GET':
-        return render_template("test_player.html", player=player)
+        return render_template("player_by_id.html", player=player)
     else:
+        # change player informations
         to_team = request.form['ToTeam']
         tt = TransferTable(get_db())
         transfer = TransferModel(player_id, player.contract.club, to_team, 1, 1, True)

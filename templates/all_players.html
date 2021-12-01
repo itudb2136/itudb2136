@@ -6,26 +6,35 @@
 
 {% block content %}
 
-<div class="row players-card">
-{% for player in players %}
-    <div class="player-card">
-        <div class="card" style="width: 18rem;">
-            {% if player.image.image is none %}
-            <img src="../static/default-player-photo.jpg" alt="Profile Photo" width="200" height="200">     
-            {% else %}
-            <img src="data:;base64,{{pic}}" alt="WOOW" width="200" height="200"> 
-            {% endif %}
-            <div class="card-body">
-            <h5 class="card-title">{{ player.name }}</h5>
-            <p class="card-text">Player of {{ ct.get_club_by_id(player.contract.club).club_name }} until {{ player.contract.contract_valid_until }}.</p>
-            <a href="{{ url_for('player_bp.show_player_by_id', player_id=player.player_id) }}" class="btn btn-primary">View</a>
+<div class="players">
+    <div class="row players-card">
+    {% for player in players %}
+        <div class="player-card">
+            <div class="card" style="width: 18rem;">
+                {% if player.image.image is none %}
+                    <img src="../static/default-player-photo.jpg" alt="Profile Photo" width="200" height="200">     
+                {% else %}
+                    <img src="data:;base64,{{pic}}" alt="WOOW" width="200" height="200"> 
+                {% endif %}
+                <div class="card-body">
+                <h5 class="card-title">{{ player.name }}</h5>
+                <p class="card-text">Player of {{ ct.get_club_by_id(player.contract.club).club_name }} until {{ player.contract.contract_valid_until }}.</p>
+                <a href="{{ url_for('player_bp.show_player_by_id', player_id=player.player_id) }}" class="btn btn-primary">View</a>
+                </div>
             </div>
         </div>
+    {% endfor %}
     </div>
-{% endfor %}
+    
+    <div class="col col-lg-2 players-info">
+        <h5>Statistics of players</h5>
+        {% for label, info in statistics.items() %}
+            <div>{{ label }}</div>
+            <div>{{ info }}</div>
+        {% endfor %}
+    </div>
+
 </div>
-
-
 
 
 
