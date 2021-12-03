@@ -1,6 +1,7 @@
 from flask import g, request, Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required
-from controllers.forms import SignupForm, LoginForm
+from controllers.forms.SignupForm import SignupForm
+from controllers.forms.LoginForm import LoginForm
 from models.club_model import ClubTable
 from database import get_db
 from models.user_model import User, UserTable
@@ -30,7 +31,11 @@ def signup():
 
 @auth_bp.route("/login", methods=['GET', 'POST'])
 def login():
-    pass
+    form = LoginForm()
+    if form.validate_on_submit():
+        pass
+    
+    return render_template('login.html', form=form)
 
 
 @auth_bp.route("/logout")
