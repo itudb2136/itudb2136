@@ -1,0 +1,41 @@
+{% extends "layout.html" %} {% block title %}Log In{% endblock %}
+
+{% block linkscript%}
+<link rel="stylesheet" href="../static/forms.css">
+<script src="../static/signup-form.js" defer></script>
+{% endblock %}
+
+
+
+{% block content %}
+
+<form method="POST">
+    {{ form.csrf_token }}
+
+    <div class="user-form login-form shadow">
+        <div class="form-elements">
+            <h5 style="text-align: center;">Log In</h5>
+            <div class="form-element">
+                {{ form.username.label(class_="form-input-label") }}
+                {{ form.username(size=32, class_="form-input") }}
+                {% for error in form.username.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+
+            <div class="form-element">
+                {{ form.password.label(class_="form-input-label") }}
+                {{ form.password(size=32, class_="form-input") }}
+                {% for error in form.password.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+
+            <input type="submit" value="Log In" class="form-input-button">
+        </div>
+        <div style="text-align: center;">If you are not a user, <a href="{{ url_for('auth_bp.signup') }}">sign up</a>.</div>
+    </div>
+
+</form>
+
+{% endblock %}
