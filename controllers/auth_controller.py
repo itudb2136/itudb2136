@@ -1,6 +1,6 @@
 from flask import g, request, Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required
-from controllers.forms.LoginForm import LoginForm
+from controllers.forms import SignupForm, LoginForm
 from models.club_model import ClubTable
 from database import get_db
 from models.user_model import User, UserTable
@@ -13,7 +13,7 @@ def signup():
     ct = ClubTable(get_db())
     teams = ct.get_all_clubs()
 
-    form = LoginForm()
+    form = SignupForm()
     if form.validate_on_submit():
         # validate user, if not flash and redirect there
         ut = UserTable(get_db())
