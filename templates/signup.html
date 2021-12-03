@@ -1,7 +1,7 @@
 {% extends "layout.html" %} {% block title %}Sign Up{% endblock %}
 
 {% block linkscript%}
-<link rel="stylesheet" href="../static/signup-form.css">
+<link rel="stylesheet" href="../static/forms.css">
 <script src="../static/signup-form.js" defer></script>
 {% endblock %}
 
@@ -12,7 +12,7 @@
 <form method="POST">
     {{ form.csrf_token }}
 
-    <div class="signup-form shadow">
+    <div class="user-form signup-form shadow">
         <div class="form-elements">
             <h5 style="text-align: center;">Sign Up</h5>
             <div class="form-element">
